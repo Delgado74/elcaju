@@ -1,4 +1,4 @@
-package com.example.elcaju
+package me.elcaju
 
 import io.flutter.embedding.android.FlutterActivity
 
