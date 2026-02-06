@@ -99,7 +99,7 @@ Cashu is an ecash protocol that enables Bitcoin transactions with maximum privac
 
 ```bash
 git clone https://github.com/Forte11Cuba/elcaju.git
-cd elcaju/elcaju
+cd elcaju
 ```
 
 ### Install Dependencies
