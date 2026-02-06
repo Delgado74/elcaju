@@ -1,0 +1,88 @@
+{
+  "@@locale": "es",
+
+  "appName": "ElCaju",
+  "appTagline": "Tu wallet de ecash privado",
+
+  "welcomeTitle": "Bienvenido a ElCaju",
+  "welcomeSubtitle": "Tu wallet de ecash privado.\nSimple, seguro y sin custodia.",
+
+  "createWallet": "Crear nueva wallet",
+  "restoreWallet": "Restaurar wallet",
+
+  "createWalletTitle": "Crear wallet",
+  "creatingWallet": "Creando tu wallet...",
+  "generatingSeed": "Generando tu frase semilla de forma segura",
+  "createWalletDescription": "Se generará una frase semilla de 12 palabras.\nGuárdala en un lugar seguro.",
+  "generateWallet": "Generar wallet",
+
+  "walletCreated": "¡Wallet creada!",
+  "walletCreatedDescription": "Tu wallet está lista. Te recomendamos hacer backup de tu frase semilla ahora.",
+  "backupWarning": "Sin backup, perderás acceso a tus fondos si pierdes el dispositivo.",
+  "backupNow": "Hacer backup ahora",
+  "backupLater": "Hacerlo después",
+
+  "backupTitle": "Backup",
+  "seedPhraseTitle": "Tu frase semilla",
+  "seedPhraseDescription": "Guarda estas 12 palabras en orden. Son la única forma de recuperar tu wallet.",
+  "revealSeedPhrase": "Revelar frase semilla",
+  "tapToReveal": "Toca el botón para revelar\ntu frase semilla",
+  "copyToClipboard": "Copiar al portapapeles",
+  "seedCopied": "Frase copiada al portapapeles",
+  "neverShareSeed": "Nunca compartas tu frase semilla con nadie.",
+  "confirmBackup": "He guardado mi frase semilla en un lugar seguro",
+  "continue_": "Continuar",
+
+  "restoreTitle": "Restaurar wallet",
+  "enterSeedPhrase": "Ingresa tu frase semilla",
+  "enterSeedDescription": "Escribe las 12 o 24 palabras separadas por espacios.",
+  "seedPlaceholder": "palabra1 palabra2 palabra3 ...",
+  "wordCount": "{count} palabras",
+  "@wordCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "needWords": "(necesitas 12 o 24)",
+  "restoreError": "Error al restaurar: {error}",
+  "@restoreError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+
+  "homeTitle": "Inicio",
+  "receive": "Recibir",
+  "send": "Enviar",
+  "deposit": "Depositar",
+  "withdraw": "Retirar",
+  "lightning": "Lightning",
+  "history": "Historial",
+  "noTransactions": "Sin transacciones aún",
+  "depositOrReceive": "Deposita o recibe sats para empezar",
+
+  "balance": "Balance",
+  "sats": "sats",
+
+  "settings": "Configuración",
+  "backupSeedPhrase": "Backup seed phrase",
+  "connectedMints": "Mints conectados",
+  "pinAccess": "PIN de acceso",
+  "language": "Idioma",
+  "spanish": "Español",
+  "english": "English",
+  "version": "Versión",
+  "about": "Acerca de",
+  "deleteWallet": "Borrar wallet",
+
+  "confirm": "Confirmar",
+  "cancel": "Cancelar",
+  "error": "Error",
+  "success": "Éxito",
+  "loading": "Cargando...",
+  "retry": "Reintentar"
+}

@@ -1,0 +1,74 @@
+{
+  "@@locale": "en",
+
+  "appName": "ElCaju",
+  "appTagline": "Your private ecash wallet",
+
+  "welcomeTitle": "Welcome to ElCaju",
+  "welcomeSubtitle": "Your private ecash wallet.\nSimple, secure and non-custodial.",
+
+  "createWallet": "Create new wallet",
+  "restoreWallet": "Restore wallet",
+
+  "createWalletTitle": "Create wallet",
+  "creatingWallet": "Creating your wallet...",
+  "generatingSeed": "Generating your seed phrase securely",
+  "createWalletDescription": "A 12-word seed phrase will be generated.\nStore it in a safe place.",
+  "generateWallet": "Generate wallet",
+
+  "walletCreated": "Wallet created!",
+  "walletCreatedDescription": "Your wallet is ready. We recommend backing up your seed phrase now.",
+  "backupWarning": "Without backup, you will lose access to your funds if you lose the device.",
+  "backupNow": "Backup now",
+  "backupLater": "Do it later",
+
+  "backupTitle": "Backup",
+  "seedPhraseTitle": "Your seed phrase",
+  "seedPhraseDescription": "Save these 12 words in order. They are the only way to recover your wallet.",
+  "revealSeedPhrase": "Reveal seed phrase",
+  "tapToReveal": "Tap the button to reveal\nyour seed phrase",
+  "copyToClipboard": "Copy to clipboard",
+  "seedCopied": "Phrase copied to clipboard",
+  "neverShareSeed": "Never share your seed phrase with anyone.",
+  "confirmBackup": "I have saved my seed phrase in a safe place",
+  "continue_": "Continue",
+
+  "restoreTitle": "Restore wallet",
+  "enterSeedPhrase": "Enter your seed phrase",
+  "enterSeedDescription": "Type the 12 or 24 words separated by spaces.",
+  "seedPlaceholder": "word1 word2 word3 ...",
+  "wordCount": "{count} words",
+  "needWords": "(you need 12 or 24)",
+  "restoreError": "Restore error: {error}",
+
+  "homeTitle": "Home",
+  "receive": "Receive",
+  "send": "Send",
+  "deposit": "Deposit",
+  "withdraw": "Withdraw",
+  "lightning": "Lightning",
+  "history": "History",
+  "noTransactions": "No transactions yet",
+  "depositOrReceive": "Deposit or receive sats to start",
+
+  "balance": "Balance",
+  "sats": "sats",
+
+  "settings": "Settings",
+  "backupSeedPhrase": "Backup seed phrase",
+  "connectedMints": "Connected mints",
+  "pinAccess": "PIN access",
+  "language": "Language",
+  "spanish": "Español",
+  "english": "English",
+  "version": "Version",
+  "about": "About",
+  "deleteWallet": "Delete wallet",
+
+  "confirm": "Confirm",
+  "cancel": "Cancel",
+  "error": "Error",
+  "success": "Success",
+  "loading": "Loading...",
+  "retry": "Retry"
+}
