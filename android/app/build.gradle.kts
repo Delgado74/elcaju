@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "org.cubabitcoin.elcaju"
+    namespace = "me.elcaju"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = "27.0.12077973"
 
@@ -20,7 +20,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "org.cubabitcoin.elcaju"
+        applicationId = "me.elcaju"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion
