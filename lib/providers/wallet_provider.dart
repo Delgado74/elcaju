@@ -1,11 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
-import 'dart:typed_data';
 import 'package:flutter/foundation.dart';
 import 'package:cbor/cbor.dart';
 import 'package:cdk_flutter/cdk_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 /// Helper class para info de token parseado
 class TokenInfo {
@@ -47,6 +47,14 @@ class WalletProvider extends ChangeNotifier {
   /// Unidad activa actualmente
   String _activeUnit = 'sat';
 
+  /// Claves para persistencia en SharedPreferences
+  static const _mintsKey = 'wallet_mints';
+  static const _activeMintKey = 'wallet_active_mint';
+  static const _activeUnitKey = 'wallet_active_unit';
+
+  /// Mint de Cuba Bitcoin - siempre aparece primero en la lista
+  static const cubaBitcoinMint = 'https://mint.cubabitcoin.org';
+
   // ============================================================
   // GETTERS
   // ============================================================
@@ -68,15 +76,137 @@ class WalletProvider extends ChangeNotifier {
   /// Todos los wallets creados (para verificación de proofs)
   Iterable<Wallet> get allWallets => _wallets.values;
 
-  /// Lista de URLs de mints conocidos
+  /// Lista de URLs de mints conocidos (orden de inserción)
   List<String> get mintUrls => _mintUnits.keys.toList();
+
+  /// Lista de mints ordenados por balance.
+  /// Cuba Bitcoin siempre primero, luego ordenados por: sats → usd → eur → otros.
+  Future<List<String>> getSortedMintUrls() async {
+    final mints = _mintUnits.keys.toList();
+
+    if (mints.length <= 1) return mints;
+
+    // Obtener balances de cada mint
+    final mintBalances = <String, Map<String, BigInt>>{};
+    for (final mint in mints) {
+      mintBalances[mint] = await getBalancesForMint(mint);
+    }
+
+    // Orden de prioridad de unidades
+    const unitPriority = ['sat', 'usd', 'eur'];
+
+    // Ordenar mints (excepto Cuba Bitcoin)
+    final otherMints = mints.where((m) => m != cubaBitcoinMint).toList();
+
+    otherMints.sort((a, b) {
+      final balancesA = mintBalances[a] ?? {};
+      final balancesB = mintBalances[b] ?? {};
+
+      // Comparar por cada unidad en orden de prioridad
+      for (final unit in unitPriority) {
+        final balA = balancesA[unit] ?? BigInt.zero;
+        final balB = balancesB[unit] ?? BigInt.zero;
+        if (balA != balB) {
+          return balB.compareTo(balA); // Mayor primero
+        }
+      }
+
+      // Si empatan en las prioritarias, comparar otras unidades alfabéticamente
+      final otherUnitsA = balancesA.keys.where((u) => !unitPriority.contains(u)).toList()..sort();
+      final otherUnitsB = balancesB.keys.where((u) => !unitPriority.contains(u)).toList()..sort();
+
+      for (final unit in {...otherUnitsA, ...otherUnitsB}) {
+        final balA = balancesA[unit] ?? BigInt.zero;
+        final balB = balancesB[unit] ?? BigInt.zero;
+        if (balA != balB) {
+          return balB.compareTo(balA);
+        }
+      }
+
+      return 0;
+    });
+
+    // Cuba Bitcoin siempre primero
+    final result = <String>[];
+    if (mints.contains(cubaBitcoinMint)) {
+      result.add(cubaBitcoinMint);
+    }
+    result.addAll(otherMints);
+
+    return result;
+  }
+
+  // ============================================================
+  // PERSISTENCIA DE MINTS
+  // ============================================================
+
+  /// Guarda la lista de mints y sus unidades en SharedPreferences.
+  Future<void> _saveMints() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    // Guardar mints como JSON: {"url": ["sat", "usd"], ...}
+    final mintsJson = jsonEncode(_mintUnits);
+    await prefs.setString(_mintsKey, mintsJson);
+
+    // Guardar mint y unidad activos
+    if (_activeMintUrl != null) {
+      await prefs.setString(_activeMintKey, _activeMintUrl!);
+    }
+    await prefs.setString(_activeUnitKey, _activeUnit);
+
+    debugPrint('Mints guardados: ${_mintUnits.keys.length}');
+  }
+
+  /// Carga la lista de mints desde SharedPreferences.
+  /// Retorna true si había mints guardados.
+  Future<bool> _loadMints() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    final mintsJson = prefs.getString(_mintsKey);
+    if (mintsJson == null || mintsJson.isEmpty) {
+      return false;
+    }
+
+    try {
+      final decoded = jsonDecode(mintsJson) as Map<String, dynamic>;
+      _mintUnits.clear();
+
+      for (final entry in decoded.entries) {
+        final units = (entry.value as List<dynamic>).cast<String>();
+        _mintUnits[entry.key] = units;
+      }
+
+      // Cargar mint y unidad activos
+      _activeMintUrl = prefs.getString(_activeMintKey);
+      _activeUnit = prefs.getString(_activeUnitKey) ?? 'sat';
+
+      // Verificar que el mint activo existe
+      if (_activeMintUrl != null && !_mintUnits.containsKey(_activeMintUrl)) {
+        _activeMintUrl = _mintUnits.keys.firstOrNull;
+      }
+
+      // Verificar que la unidad activa es válida para el mint
+      if (_activeMintUrl != null) {
+        final units = _mintUnits[_activeMintUrl]!;
+        if (!units.contains(_activeUnit)) {
+          _activeUnit = units.first;
+        }
+      }
+
+      debugPrint('Mints cargados: ${_mintUnits.keys.length}');
+      return _mintUnits.isNotEmpty;
+    } catch (e) {
+      debugPrint('Error cargando mints: $e');
+      return false;
+    }
+  }
 
   // ============================================================
   // INICIALIZACION
   // ============================================================
 
   /// Inicializa el provider con un mnemonic.
-  /// Carga mints y unidades desde la información guardada.
+  /// Carga mints y unidades desde SharedPreferences.
   Future<void> initialize(String mnemonic) async {
     _mnemonic = mnemonic;
 
@@ -87,35 +217,23 @@ class WalletProvider extends ChangeNotifier {
     // Crear base de datos (se crea automáticamente si no existe)
     _db = await WalletDatabase.newInstance(path: dbPath);
 
-    // Verificar si es primera vez
-    // Creamos un wallet temporal para ver si hay mints guardados
-    final tempWallet = Wallet(
-      mintUrl: 'https://mint.cubabitcoin.org',
-      unit: 'sat',
-      mnemonic: mnemonic,
-      db: _db!,
-    );
+    // Intentar cargar mints desde SharedPreferences
+    final hasSavedMints = await _loadMints();
 
-    // Intentar obtener balance - si tiene datos, ya fue inicializado antes
-    try {
-      final balance = await tempWallet.balance();
-
-      // Si llegamos aquí, el mint existe en la DB
-      // Agregar mint por defecto con sus unidades
-      await _detectAndAddMint('https://mint.cubabitcoin.org');
-
-      // Guardar el wallet
-      _wallets['https://mint.cubabitcoin.org:sat'] = tempWallet;
-
-      // Establecer como activo
-      _activeMintUrl = 'https://mint.cubabitcoin.org';
-      _activeUnit = 'sat';
-
-      // Si tiene balance > 0, definitivamente existía
-      if (balance > BigInt.zero) {
-        debugPrint('Wallet restaurado con balance: $balance');
+    if (hasSavedMints) {
+      // Cargar keysets para cada mint guardado
+      for (final mintUrl in _mintUnits.keys) {
+        try {
+          await _fetchKeysets(mintUrl);
+          // Crear wallet para la primera unidad de cada mint
+          final units = _mintUnits[mintUrl]!;
+          await getWallet(mintUrl, units.first);
+        } catch (e) {
+          debugPrint('Error cargando mint $mintUrl: $e');
+        }
       }
-    } catch (e) {
+      debugPrint('Mints restaurados: ${_mintUnits.keys.length}');
+    } else {
       // Primera vez - agregar mint por defecto
       await addMint('https://mint.cubabitcoin.org');
     }
@@ -260,6 +378,9 @@ class WalletProvider extends ChangeNotifier {
       _activeUnit = units.first;
     }
 
+    // Persistir cambios
+    await _saveMints();
+
     notifyListeners();
   }
 
@@ -307,6 +428,9 @@ class WalletProvider extends ChangeNotifier {
       }
     }
 
+    // Persistir cambios
+    await _saveMints();
+
     notifyListeners();
   }
 
@@ -331,6 +455,9 @@ class WalletProvider extends ChangeNotifier {
     // Asegurar que el wallet existe
     await getWallet(mintUrl, _activeUnit);
 
+    // Persistir cambio
+    await _saveMints();
+
     notifyListeners();
   }
 
@@ -347,6 +474,9 @@ class WalletProvider extends ChangeNotifier {
 
     // Asegurar que el wallet existe
     await getWallet(_activeMintUrl!, unit);
+
+    // Persistir cambio
+    await _saveMints();
 
     notifyListeners();
   }

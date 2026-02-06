@@ -42,32 +42,47 @@ class _MintsScreenState extends State<MintsScreen> {
         body: SafeArea(
           child: Consumer<WalletProvider>(
             builder: (context, walletProvider, child) {
-              final mintUrls = walletProvider.mintUrls;
-
               return Padding(
                 padding: const EdgeInsets.all(AppDimensions.paddingMedium),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    // Lista de mints
+                    // Lista de mints ordenados por balance
                     Expanded(
-                      child: mintUrls.isEmpty
-                          ? _buildEmptyState()
-                          : ListView.builder(
-                              itemCount: mintUrls.length,
-                              itemBuilder: (context, index) {
-                                final mintUrl = mintUrls[index];
-                                return Padding(
-                                  padding: const EdgeInsets.only(
-                                    bottom: AppDimensions.paddingMedium,
-                                  ),
-                                  child: _buildMintCard(
-                                    mintUrl,
-                                    walletProvider,
-                                  ),
-                                );
-                              },
-                            ),
+                      child: FutureBuilder<List<String>>(
+                        future: walletProvider.getSortedMintUrls(),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState == ConnectionState.waiting) {
+                            return const Center(
+                              child: CircularProgressIndicator(
+                                color: AppColors.primaryAction,
+                              ),
+                            );
+                          }
+
+                          final mintUrls = snapshot.data ?? walletProvider.mintUrls;
+
+                          if (mintUrls.isEmpty) {
+                            return _buildEmptyState();
+                          }
+
+                          return ListView.builder(
+                            itemCount: mintUrls.length,
+                            itemBuilder: (context, index) {
+                              final mintUrl = mintUrls[index];
+                              return Padding(
+                                padding: const EdgeInsets.only(
+                                  bottom: AppDimensions.paddingMedium,
+                                ),
+                                child: _buildMintCard(
+                                  mintUrl,
+                                  walletProvider,
+                                ),
+                              );
+                            },
+                          );
+                        },
+                      ),
                     ),
 
                     // Botón agregar mint
@@ -119,6 +134,7 @@ class _MintsScreenState extends State<MintsScreen> {
   Widget _buildMintCard(String mintUrl, WalletProvider walletProvider) {
     final isActive = walletProvider.activeMintUrl == mintUrl;
     final units = walletProvider.getUnitsForMint(mintUrl);
+    final isCubaBitcoin = mintUrl == WalletProvider.cubaBitcoinMint;
 
     return FutureBuilder<Map<String, BigInt>>(
       future: walletProvider.getBalancesForMint(mintUrl),
@@ -278,41 +294,42 @@ class _MintsScreenState extends State<MintsScreen> {
                       ),
                     ),
 
-                  if (!isActive) const SizedBox(width: 8),
+                  if (!isActive && !isCubaBitcoin) const SizedBox(width: 8),
 
-                  // Eliminar
-                  Expanded(
-                    child: GestureDetector(
-                      onTap: () => _showDeleteDialog(mintUrl, balances, walletProvider),
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(vertical: 10),
-                        decoration: BoxDecoration(
-                          color: AppColors.error.withValues(alpha: 0.15),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              LucideIcons.trash2,
-                              color: AppColors.error,
-                              size: 16,
-                            ),
-                            const SizedBox(width: 6),
-                            Text(
-                              'Eliminar',
-                              style: TextStyle(
-                                fontFamily: 'Inter',
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500,
+                  // Eliminar (no disponible para Cuba Bitcoin)
+                  if (!isCubaBitcoin)
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () => _showDeleteDialog(mintUrl, balances, walletProvider),
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          decoration: BoxDecoration(
+                            color: AppColors.error.withValues(alpha: 0.15),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                LucideIcons.trash2,
                                 color: AppColors.error,
+                                size: 16,
                               ),
-                            ),
-                          ],
+                              const SizedBox(width: 6),
+                              Text(
+                                'Eliminar',
+                                style: TextStyle(
+                                  fontFamily: 'Inter',
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                                  color: AppColors.error,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
                 ],
               ),
             ],
