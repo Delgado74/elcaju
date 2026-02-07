@@ -285,5 +285,42 @@
       "amount": { "type": "String" },
       "unit": { "type": "String" }
     }
+  },
+
+  "receiveNow": "Receive now",
+  "receiveLater": "Receive later",
+  "tokenSavedForLater": "Token saved to claim later",
+  "pendingTokenLimitReached": "Pending tokens limit reached (max 50)",
+  "filterToReceive": "To receive",
+  "noPendingTokens": "No pending tokens",
+  "noPendingTokensHint": "Save tokens to claim later",
+  "pendingBadge": "PENDING",
+  "expiresInDays": "{days, plural, =1{Expires in 1 day} other{Expires in {days} days}}",
+  "@expiresInDays": {
+    "placeholders": {
+      "days": { "type": "int" }
+    }
+  },
+  "retryCount": "{count} retries",
+  "@retryCount": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "claimNow": "Claim now",
+  "pendingTokenClaimedSuccess": "Claimed {amount} {unit}",
+  "@pendingTokenClaimedSuccess": {
+    "placeholders": {
+      "amount": { "type": "String" },
+      "unit": { "type": "String" }
+    }
+  },
+  "pendingTokensClaimed": "{count, plural, =1{Claimed 1 token ({amount} {unit})} other{Claimed {count} tokens ({amount} {unit})}}",
+  "@pendingTokensClaimed": {
+    "placeholders": {
+      "count": { "type": "int" },
+      "amount": { "type": "String" },
+      "unit": { "type": "String" }
+    }
   }
 }
