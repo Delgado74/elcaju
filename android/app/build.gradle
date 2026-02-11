@@ -21,7 +21,7 @@ android {
 
     defaultConfig {
         applicationId "me.elcaju"
-        minSdk flutter.minSdkVersion
+        minSdk 21  // Required for FlutterSecureStorage (EncryptedSharedPreferences)
         targetSdk flutter.targetSdkVersion
         versionCode flutter.versionCode
         versionName flutter.versionName
