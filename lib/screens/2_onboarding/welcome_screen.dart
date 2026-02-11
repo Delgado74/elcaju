@@ -10,100 +10,29 @@ import '../../widgets/common/primary_button.dart';
 import '../../widgets/common/secondary_button.dart';
 import 'create_wallet_screen.dart';
 import 'restore_wallet_screen.dart';
+import '../8_settings/language_screen.dart';
 
 /// Pantalla de bienvenida - Onboarding
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
 
-  static const _languages = [
-    {'code': 'es', 'flag': '🇪🇸', 'name': 'Español'},
-    {'code': 'en', 'flag': '🇬🇧', 'name': 'English'},
-  ];
+  // Mapa de códigos de idioma a banderas
+  static const Map<String, String> _languageFlags = {
+    'es': '🇪🇸',
+    'en': '🇬🇧',
+    'pt': '🇵🇹',
+    'fr': '🇫🇷',
+    'it': '🇮🇹',
+    'de': '🇩🇪',
+    'ru': '🇷🇺',
+    'zh': '🇨🇳',
+    'ja': '🇯🇵',
+    'ko': '🇰🇷',
+    'sw': '🇰🇪',
+  };
 
-  void _showLanguageSelector(BuildContext context) {
-    final settingsProvider = context.read<SettingsProvider>();
-
-    showModalBottomSheet(
-      context: context,
-      backgroundColor: Colors.transparent,
-      builder: (context) => Container(
-        padding: const EdgeInsets.all(AppDimensions.paddingMedium),
-        decoration: BoxDecoration(
-          color: AppColors.deepVoidPurple,
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
-          border: Border.all(
-            color: Colors.white.withValues(alpha: 0.1),
-          ),
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            // Handle
-            Container(
-              margin: const EdgeInsets.only(bottom: 16),
-              width: 40,
-              height: 4,
-              decoration: BoxDecoration(
-                color: Colors.white.withValues(alpha: 0.3),
-                borderRadius: BorderRadius.circular(2),
-              ),
-            ),
-            // Opciones de idioma
-            ..._languages.map((lang) {
-              final isSelected = settingsProvider.locale == lang['code'];
-              return GestureDetector(
-                onTap: () {
-                  settingsProvider.setLocale(lang['code']!);
-                  Navigator.pop(context);
-                },
-                child: Container(
-                  width: double.infinity,
-                  margin: const EdgeInsets.only(bottom: 8),
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: isSelected
-                        ? AppColors.primaryAction.withValues(alpha: 0.2)
-                        : Colors.white.withValues(alpha: 0.05),
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(
-                      color: isSelected
-                          ? AppColors.primaryAction.withValues(alpha: 0.5)
-                          : Colors.white.withValues(alpha: 0.1),
-                    ),
-                  ),
-                  child: Row(
-                    children: [
-                      Text(
-                        lang['flag']!,
-                        style: const TextStyle(fontSize: 24),
-                      ),
-                      const SizedBox(width: 12),
-                      Text(
-                        lang['name']!,
-                        style: TextStyle(
-                          fontFamily: 'Inter',
-                          fontSize: 16,
-                          fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
-                          color: isSelected ? AppColors.primaryAction : Colors.white,
-                        ),
-                      ),
-                      const Spacer(),
-                      if (isSelected)
-                        const Icon(
-                          LucideIcons.checkCircle,
-                          color: AppColors.primaryAction,
-                          size: 22,
-                        ),
-                    ],
-                  ),
-                ),
-              );
-            }),
-            const SizedBox(height: 8),
-          ],
-        ),
-      ),
-    );
+  String _getFlag(String locale) {
+    return _languageFlags[locale] ?? '🇪🇸';
   }
 
   @override
@@ -111,7 +40,7 @@ class WelcomeScreen extends StatelessWidget {
     final l10n = L10n.of(context)!;
 
     final settingsProvider = context.watch<SettingsProvider>();
-    final isSpanish = settingsProvider.locale == 'es';
+    final currentLocale = settingsProvider.locale;
 
     return GradientBackground(
       child: Scaffold(
@@ -125,7 +54,14 @@ class WelcomeScreen extends StatelessWidget {
                 Align(
                   alignment: Alignment.topRight,
                   child: GestureDetector(
-                    onTap: () => _showLanguageSelector(context),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const LanguageScreen(),
+                        ),
+                      );
+                    },
                     child: Container(
                       padding: const EdgeInsets.symmetric(
                         horizontal: 12,
@@ -142,12 +78,12 @@ class WelcomeScreen extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
-                            isSpanish ? '🇪🇸' : '🇬🇧',
+                            _getFlag(currentLocale),
                             style: const TextStyle(fontSize: 18),
                           ),
                           const SizedBox(width: 6),
                           Text(
-                            isSpanish ? 'ES' : 'EN',
+                            currentLocale.toUpperCase(),
                             style: const TextStyle(
                               fontFamily: 'Inter',
                               fontSize: 14,
@@ -157,7 +93,7 @@ class WelcomeScreen extends StatelessWidget {
                           ),
                           const SizedBox(width: 4),
                           Icon(
-                            LucideIcons.chevronDown,
+                            LucideIcons.chevronRight,
                             color: Colors.white.withValues(alpha: 0.7),
                             size: 18,
                           ),

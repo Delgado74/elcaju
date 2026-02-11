@@ -12,6 +12,7 @@ import '../../widgets/common/gradient_background.dart';
 import '../../widgets/common/glass_card.dart';
 import '../2_onboarding/backup_seed_screen.dart';
 import 'mints_screen.dart';
+import 'language_screen.dart';
 
 /// Pantalla de configuración
 class SettingsScreen extends StatefulWidget {
@@ -103,7 +104,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       icon: LucideIcons.globe,
                       title: l10n.language,
                       subtitle: _getLanguageName(settingsProvider.locale),
-                      onTap: () => _showLanguageSelector(context, settingsProvider),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const LanguageScreen(),
+                          ),
+                        );
+                      },
                     ),
 
                     const SizedBox(height: AppDimensions.paddingLarge),
@@ -479,195 +487,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     }
   }
 
-  /// 3. Selector de idioma
-  void _showLanguageSelector(
-      BuildContext context, SettingsProvider settingsProvider) {
-    final l10n = L10n.of(context)!;
-    showModalBottomSheet(
-      context: context,
-      backgroundColor: Colors.transparent,
-      builder: (context) => Container(
-        padding: const EdgeInsets.all(AppDimensions.paddingMedium),
-        decoration: BoxDecoration(
-          color: AppColors.deepVoidPurple,
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
-          border: Border.all(
-            color: Colors.white.withValues(alpha: 0.1),
-            width: 1,
-          ),
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            // Handle
-            Container(
-              margin: const EdgeInsets.only(bottom: 16),
-              width: 40,
-              height: 4,
-              decoration: BoxDecoration(
-                color: Colors.white.withValues(alpha: 0.3),
-                borderRadius: BorderRadius.circular(2),
-              ),
-            ),
-            Text(
-              l10n.selectLanguage,
-              style: const TextStyle(
-                fontFamily: 'Inter',
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-            ),
-            const SizedBox(height: AppDimensions.paddingMedium),
-            _buildLanguageOption(
-              context,
-              settingsProvider,
-              'es',
-              l10n.spanish,
-              '🇪🇸',
-            ),
-            _buildLanguageOption(
-              context,
-              settingsProvider,
-              'en',
-              l10n.english,
-              '🇬🇧',
-            ),
-            _buildLanguageOption(
-              context,
-              settingsProvider,
-              'pt',
-              l10n.portuguese,
-              '🇵🇹',
-            ),
-            _buildLanguageOption(
-              context,
-              settingsProvider,
-              'fr',
-              l10n.french,
-              '🇫🇷',
-            ),
-            _buildLanguageOption(
-              context,
-              settingsProvider,
-              'ru',
-              l10n.russian,
-              '🇷🇺',
-            ),
-            _buildLanguageOption(
-              context,
-              settingsProvider,
-              'de',
-              l10n.german,
-              '🇩🇪',
-            ),
-            _buildLanguageOption(
-              context,
-              settingsProvider,
-              'it',
-              l10n.italian,
-              '🇮🇹',
-            ),
-            _buildLanguageOption(
-              context,
-              settingsProvider,
-              'ko',
-              l10n.korean,
-              '🇰🇷',
-            ),
-            _buildLanguageOption(
-              context,
-              settingsProvider,
-              'zh',
-              l10n.chinese,
-              '🇨🇳',
-            ),
-            _buildLanguageOption(
-              context,
-              settingsProvider,
-              'ja',
-              l10n.japanese,
-              '🇯🇵',
-            ),
-            _buildLanguageOption(
-              context,
-              settingsProvider,
-              'sw',
-              l10n.swahili,
-              '🇰🇪',
-            ),
-            const SizedBox(height: AppDimensions.paddingSmall),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildLanguageOption(
-    BuildContext context,
-    SettingsProvider settingsProvider,
-    String locale,
-    String name,
-    String flag,
-  ) {
-    final isSelected = settingsProvider.locale == locale;
-
-    return GestureDetector(
-      onTap: () async {
-        await settingsProvider.setLocale(locale);
-        if (mounted) {
-          Navigator.pop(context);
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(L10n.of(context)!.languageChanged(name)),
-              backgroundColor: AppColors.success,
-            ),
-          );
-        }
-      },
-      child: Container(
-        margin: const EdgeInsets.only(bottom: 8),
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        decoration: BoxDecoration(
-          color: isSelected
-              ? AppColors.primaryAction.withValues(alpha: 0.2)
-              : Colors.white.withValues(alpha: 0.05),
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(
-            color: isSelected
-                ? AppColors.primaryAction.withValues(alpha: 0.5)
-                : Colors.transparent,
-            width: 1,
-          ),
-        ),
-        child: Row(
-          children: [
-            Text(flag, style: const TextStyle(fontSize: 24)),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Text(
-                name,
-                style: TextStyle(
-                  fontFamily: 'Inter',
-                  fontSize: 16,
-                  fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-            if (isSelected)
-              Icon(
-                LucideIcons.check,
-                color: AppColors.primaryAction,
-                size: 20,
-              ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  /// 4. Acerca de
+  /// 3. Acerca de
   void _showAboutDialog(BuildContext context) {
     showDialog(
       context: context,
@@ -777,7 +597,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  /// 5. Abrir GitHub
+  /// 4. Abrir GitHub
   Future<void> _openGitHub() async {
     final url = Uri.parse('https://github.com/Forte11Cuba/elcaju');
     try {
@@ -794,7 +614,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     }
   }
 
-  /// 6. Recuperar tokens
+  /// 5. Recuperar tokens
   void _showRecoverTokensDialog(
       BuildContext context, SettingsProvider settingsProvider) {
     showModalBottomSheet(
@@ -807,7 +627,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  /// 7. Borrar wallet
+  /// 6. Borrar wallet
   void _showDeleteWalletDialog(
       BuildContext context, SettingsProvider settingsProvider) {
     showModalBottomSheet(
