@@ -919,11 +919,20 @@ class WalletProvider extends ChangeNotifier {
 
   /// Prepara un envío P2PK (bloqueado a una clave pública).
   Future<PreparedSend> prepareSendP2pk(BigInt amount, String pubkey) async {
+    debugPrint('[WalletProvider] prepareSendP2pk: amount=$amount, pubkey=${pubkey.substring(0, 16)}...');
     final wallet = await getActiveWallet();
-    return await wallet.prepareSend(
-      amount: amount,
-      opts: SendOptions(pubkey: pubkey),
-    );
+    debugPrint('[WalletProvider] Got wallet, calling prepareSend with P2PK...');
+    try {
+      final prepared = await wallet.prepareSend(
+        amount: amount,
+        opts: SendOptions(pubkey: pubkey),
+      );
+      debugPrint('[WalletProvider] prepareSendP2pk SUCCESS');
+      return prepared;
+    } catch (e) {
+      debugPrint('[WalletProvider] prepareSendP2pk ERROR: $e');
+      rethrow;
+    }
   }
 
   /// Confirma un envío preparado y retorna el token encoded.

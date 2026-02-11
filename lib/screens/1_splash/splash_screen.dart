@@ -8,6 +8,7 @@ import '../../core/constants/dimensions.dart';
 import '../../widgets/common/gradient_background.dart';
 import '../../providers/settings_provider.dart';
 import '../../providers/wallet_provider.dart';
+import '../../providers/p2pk_provider.dart';
 import '../2_onboarding/welcome_screen.dart';
 import '../3_home/home_screen.dart';
 
@@ -78,6 +79,7 @@ class _SplashScreenState extends State<SplashScreen>
     try {
       final settingsProvider = context.read<SettingsProvider>();
       final walletProvider = context.read<WalletProvider>();
+      final p2pkProvider = context.read<P2PKProvider>();
 
       // Inicializar settings (cargar preferencias)
       await settingsProvider.initialize();
@@ -94,6 +96,9 @@ class _SplashScreenState extends State<SplashScreen>
 
         if (mnemonic != null && mnemonic.isNotEmpty) {
           await walletProvider.initialize(mnemonic);
+
+          // Inicializar P2PK (derivar clave principal del mnemonic)
+          await p2pkProvider.initialize(mnemonic);
 
           if (!mounted) return;
 

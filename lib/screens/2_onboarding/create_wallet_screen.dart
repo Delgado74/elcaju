@@ -10,6 +10,7 @@ import '../../widgets/common/secondary_button.dart';
 import '../../widgets/common/glass_card.dart';
 import '../../providers/wallet_provider.dart';
 import '../../providers/settings_provider.dart';
+import '../../providers/p2pk_provider.dart';
 import 'backup_seed_screen.dart';
 import '../3_home/home_screen.dart';
 
@@ -36,6 +37,7 @@ class _CreateWalletScreenState extends State<CreateWalletScreen> {
     try {
       final walletProvider = context.read<WalletProvider>();
       final settingsProvider = context.read<SettingsProvider>();
+      final p2pkProvider = context.read<P2PKProvider>();
 
       // Generar mnemonic real (12 palabras BIP39)
       _mnemonic = walletProvider.generateNewMnemonic();
@@ -45,6 +47,9 @@ class _CreateWalletScreenState extends State<CreateWalletScreen> {
 
       // Inicializar wallet con el mnemonic
       await walletProvider.initialize(_mnemonic!);
+
+      // Inicializar P2PK (derivar clave principal del mnemonic)
+      await p2pkProvider.initialize(_mnemonic!);
 
       setState(() {
         _isCreating = false;

@@ -56,6 +56,9 @@ dependencies:
   # UUID generator for pending tokens
   uuid: ^4.3.3
 
+  # BIP32 for NIP-06 key derivation (P2PK)
+  bip32: ^2.0.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

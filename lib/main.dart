@@ -8,6 +8,7 @@ import 'core/theme/app_theme.dart';
 import 'providers/wallet_provider.dart';
 import 'providers/settings_provider.dart';
 import 'providers/price_provider.dart';
+import 'providers/p2pk_provider.dart';
 import 'screens/1_splash/splash_screen.dart';
 
 void main() async {
@@ -40,6 +41,7 @@ void main() async {
       providers: [
         ChangeNotifierProvider(create: (_) => SettingsProvider()),
         ChangeNotifierProvider(create: (_) => WalletProvider()),
+        ChangeNotifierProvider(create: (_) => P2PKProvider()),
         ChangeNotifierProvider.value(value: priceProvider),
       ],
       child: const ElCajuApp(),
