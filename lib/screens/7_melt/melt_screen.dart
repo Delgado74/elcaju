@@ -678,7 +678,7 @@ class _MeltScreenState extends State<MeltScreen> {
       if (mounted) {
         setState(() {
           _isResolvingLnurl = false;
-          _errorMessage = 'Error LNURL: ${e.toString().replaceFirst('Exception: ', '')}';
+          _errorMessage = L10n.of(context)!.paymentError(e.toString().replaceFirst('Exception: ', ''));
         });
       }
     }
@@ -710,7 +710,7 @@ class _MeltScreenState extends State<MeltScreen> {
       if (mounted) {
         setState(() {
           _isResolvingLnurl = false;
-          _errorMessage = 'Error: ${e.toString().replaceFirst('Exception: ', '')}';
+          _errorMessage = L10n.of(context)!.paymentError(e.toString().replaceFirst('Exception: ', ''));
         });
       }
     }

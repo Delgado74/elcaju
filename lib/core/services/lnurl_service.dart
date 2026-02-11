@@ -153,7 +153,7 @@ class LnurlService {
     if (pad && bits > 0) {
       result.add((acc << (toBits - bits)) & maxv);
     } else if (!pad && (bits >= fromBits || ((acc << (toBits - bits)) & maxv) != 0)) {
-      // Invalid padding
+      throw FormatException('Invalid padding in bech32 conversion');
     }
 
     return result;
