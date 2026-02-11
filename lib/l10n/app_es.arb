@@ -268,6 +268,7 @@
   "english": "English",
   "portuguese": "Português",
   "french": "Français",
+  "russian": "Русский",
 
   "mnemonicNotFound": "No se encontró el mnemonic",
   "createPin": "Crear PIN",
