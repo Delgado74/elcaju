@@ -267,6 +267,7 @@
   "spanish": "Español",
   "english": "English",
   "portuguese": "Português",
+  "french": "Français",
 
   "mnemonicNotFound": "No se encontró el mnemonic",
   "createPin": "Crear PIN",
