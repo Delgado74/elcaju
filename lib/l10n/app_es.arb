@@ -270,6 +270,7 @@
   "french": "Français",
   "russian": "Русский",
   "german": "Deutsch",
+  "italian": "Italiano",
 
   "mnemonicNotFound": "No se encontró el mnemonic",
   "createPin": "Crear PIN",

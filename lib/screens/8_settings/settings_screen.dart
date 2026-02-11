@@ -321,6 +321,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
         return l10n.russian;
       case 'de':
         return l10n.german;
+      case 'it':
+        return l10n.italian;
       default:
         return l10n.spanish;
     }
@@ -550,6 +552,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
               'de',
               l10n.german,
               '🇩🇪',
+            ),
+            _buildLanguageOption(
+              context,
+              settingsProvider,
+              'it',
+              l10n.italian,
+              '🇮🇹',
             ),
             const SizedBox(height: AppDimensions.paddingSmall),
           ],
