@@ -1,0 +1,484 @@
+{
+  "@@locale": "de",
+
+  "appName": "ElCaju",
+  "appTagline": "Deine private ecash Wallet",
+  "loadingMessage1": "Verschlüsselung deiner Münzen...",
+  "loadingMessage2": "Vorbereitung deiner E-Tokens...",
+  "loadingMessage3": "Verbindung zum Mint...",
+  "loadingMessage4": "Privatsphäre standardmäßig.",
+  "loadingMessage5": "Blind signierte Tokens...",
+  "loadingMessage6": "Go full Calle...",
+  "loadingMessage7": "Cashu + Bitchat = Privatsphäre + Freiheit",
+  "aboutTagline": "Privatsphäre ohne Grenzen.",
+
+  "welcomeTitle": "Willkommen bei ElCaju",
+  "welcomeSubtitle": "Cashu für die Welt. Made in Cuba.",
+
+  "createWallet": "Neue Wallet erstellen",
+  "restoreWallet": "Wallet wiederherstellen",
+
+  "createWalletTitle": "Wallet erstellen",
+  "creatingWallet": "Erstelle deine Wallet...",
+  "generatingSeed": "Sichere Generierung deiner Seed-Phrase",
+  "createWalletDescription": "Eine 12-Wort Seed-Phrase wird generiert.\nBewahre sie an einem sicheren Ort auf.",
+  "generateWallet": "Wallet generieren",
+
+  "walletCreated": "Wallet erstellt!",
+  "walletCreatedDescription": "Deine Wallet ist bereit. Wir empfehlen, jetzt ein Backup deiner Seed-Phrase zu erstellen.",
+  "backupWarning": "Ohne Backup verlierst du den Zugang zu deinen Mitteln, wenn du das Gerät verlierst.",
+  "backupNow": "Jetzt sichern",
+  "backupLater": "Später machen",
+
+  "backupTitle": "Backup",
+  "seedPhraseTitle": "Deine Seed-Phrase",
+  "seedPhraseDescription": "Speichere diese 12 Wörter in der richtigen Reihenfolge. Sie sind der einzige Weg, deine Wallet wiederherzustellen.",
+  "revealSeedPhrase": "Seed-Phrase anzeigen",
+  "tapToReveal": "Tippe auf den Button, um\ndeine Seed-Phrase anzuzeigen",
+  "copyToClipboard": "In Zwischenablage kopieren",
+  "seedCopied": "Phrase in Zwischenablage kopiert",
+  "neverShareSeed": "Teile deine Seed-Phrase niemals mit anderen.",
+  "confirmBackup": "Ich habe meine Seed-Phrase an einem sicheren Ort gespeichert",
+  "continue_": "Weiter",
+
+  "restoreTitle": "Wallet wiederherstellen",
+  "enterSeedPhrase": "Gib deine Seed-Phrase ein",
+  "enterSeedDescription": "Gib die 12 oder 24 Wörter durch Leerzeichen getrennt ein.",
+  "seedPlaceholder": "wort1 wort2 wort3 ...",
+  "wordCount": "{count} Wörter",
+  "@wordCount": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "needWords": "(du brauchst 12 oder 24)",
+  "restoreError": "Wiederherstellungsfehler: {error}",
+  "@restoreError": {
+    "placeholders": {
+      "error": { "type": "String" }
+    }
+  },
+
+  "homeTitle": "Start",
+  "receive": "Empfangen",
+  "send": "Senden",
+  "sendAction": "Senden ↗",
+  "receiveAction": "↘ Empfangen",
+  "deposit": "Einzahlen",
+  "withdraw": "Abheben",
+  "lightning": "Lightning",
+  "cashu": "Cashu",
+  "ecash": "Ecash",
+  "history": "Verlauf",
+  "noTransactions": "Noch keine Transaktionen",
+  "depositOrReceive": "Zahle ein oder empfange Sats zum Starten",
+  "noMint": "Kein Mint",
+
+  "balance": "Guthaben",
+  "sats": "sats",
+
+  "pasteEcashToken": "Ecash Token einfügen",
+  "generateInvoiceToDeposit": "Rechnung zum Einzahlen erstellen",
+  "createEcashToken": "Ecash Token erstellen",
+  "payLightningInvoice": "Lightning Rechnung bezahlen",
+
+  "receiveCashu": "Cashu empfangen",
+  "pasteTheCashuToken": "Füge den Cashu Token ein:",
+  "pasteFromClipboard": "Aus Zwischenablage einfügen",
+  "validToken": "Token gültig",
+  "invalidToken": "Ungültiger oder fehlerhafter Token",
+  "amount": "Betrag:",
+  "mint": "Mint:",
+  "claiming": "Einlösen...",
+  "claimTokens": "Tokens einlösen",
+  "tokensReceived": "Tokens empfangen",
+  "backToHome": "Zurück zur Startseite",
+  "tokenAlreadyClaimed": "Dieser Token wurde bereits eingelöst",
+  "unknownMint": "Token von unbekanntem Mint",
+  "claimError": "Einlösungsfehler: {error}",
+  "@claimError": {
+    "placeholders": {
+      "error": { "type": "String" }
+    }
+  },
+
+  "sendCashu": "Cashu senden",
+  "selectNotesManually": "Notizen manuell auswählen",
+  "amountToSend": "Zu sendender Betrag:",
+  "available": "Verfügbar:",
+  "max": "(Max)",
+  "memoOptional": "Memo (optional):",
+  "memoPlaceholder": "Wofür ist diese Zahlung?",
+  "creatingToken": "Token wird erstellt...",
+  "createToken": "Token erstellen",
+  "noActiveMint": "Kein aktiver Mint",
+  "offlineModeMessage": "Keine Verbindung. Offline-Modus...",
+  "confirmSend": "Senden bestätigen",
+  "confirm": "Bestätigen",
+  "cancel": "Abbrechen",
+  "insufficientBalance": "Unzureichendes Guthaben",
+  "tokenCreationError": "Fehler beim Erstellen des Tokens: {error}",
+  "@tokenCreationError": {
+    "placeholders": {
+      "error": { "type": "String" }
+    }
+  },
+
+  "tokenCreated": "Token erstellt",
+  "copy": "Kopieren",
+  "share": "Teilen",
+  "tokenCashu": "Cashu Token",
+  "tokenCashuAnimatedQr": "Cashu Token (animierter QR - {fragments} UR-Fragmente)",
+  "@tokenCashuAnimatedQr": {
+    "placeholders": {
+      "fragments": { "type": "int" }
+    }
+  },
+  "keepTokenWarning": "Bewahre diesen Token auf, bis der Empfänger ihn einlöst. Wenn du ihn verlierst, verlierst du die Mittel.",
+  "tokenCopiedToClipboard": "Token in Zwischenablage kopiert",
+
+  "amountToDeposit": "Einzuzahlender Betrag:",
+  "descriptionOptional": "Beschreibung (optional):",
+  "depositPlaceholder": "Wofür ist diese Einzahlung?",
+  "generating": "Generiere...",
+  "generateInvoice": "Rechnung erstellen",
+  "depositLightning": "Lightning einzahlen",
+
+  "payInvoiceTitle": "Rechnung bezahlen",
+  "generatingInvoice": "Rechnung wird erstellt...",
+  "waitingForPayment": "Warte auf Zahlung...",
+  "paymentReceived": "Zahlung empfangen",
+  "tokensIssued": "Tokens ausgegeben!",
+  "error": "Fehler",
+  "unknownError": "Unbekannter Fehler",
+  "back": "Zurück",
+  "copyInvoice": "Rechnung kopieren",
+  "description": "Beschreibung:",
+  "invoiceCopiedToClipboard": "Rechnung in Zwischenablage kopiert",
+  "deposited": "{amount} {unit} eingezahlt",
+  "@deposited": {
+    "placeholders": {
+      "amount": { "type": "String" },
+      "unit": { "type": "String" }
+    }
+  },
+
+  "pasteLightningInvoice": "Füge die Lightning Rechnung ein:",
+  "gettingQuote": "Angebot wird geholt...",
+  "validInvoice": "Rechnung gültig",
+  "invalidInvoice": "Ungültige Rechnung",
+  "invalidInvoiceMalformed": "Ungültige oder fehlerhafte Rechnung",
+  "feeReserved": "Reservierte Gebühr:",
+  "total": "Gesamt:",
+  "paying": "Bezahle...",
+  "payInvoice": "Rechnung bezahlen",
+  "confirmPayment": "Zahlung bestätigen",
+  "pay": "Bezahlen",
+  "fee": "Gebühr",
+  "invoiceExpired": "Rechnung abgelaufen",
+  "amountOutOfRange": "Betrag außerhalb des erlaubten Bereichs",
+  "resolvingType": "Löse {type} auf...",
+  "@resolvingType": {
+    "placeholders": {
+      "type": { "type": "String" }
+    }
+  },
+  "invoiceAlreadyPaid": "Rechnung bereits bezahlt",
+  "paymentError": "Zahlungsfehler: {error}",
+  "@paymentError": {
+    "placeholders": {
+      "error": { "type": "String" }
+    }
+  },
+  "sent": "{amount} {unit} gesendet",
+  "@sent": {
+    "placeholders": {
+      "amount": { "type": "String" },
+      "unit": { "type": "String" }
+    }
+  },
+
+  "filterAll": "Alle",
+  "filterPending": "Ausstehend",
+  "filterEcash": "Ecash",
+  "filterLightning": "Lightning",
+  "receiveTokensToStart": "Empfange Cashu Tokens zum Starten",
+  "noPendingTransactions": "Keine ausstehenden Transaktionen",
+  "allTransactionsCompleted": "Alle deine Transaktionen sind abgeschlossen",
+  "noEcashTransactions": "Keine Ecash Transaktionen",
+  "sendOrReceiveTokens": "Sende oder empfange Cashu Tokens",
+  "noLightningTransactions": "Keine Lightning Transaktionen",
+  "depositOrWithdrawLightning": "Zahle ein oder hebe ab via Lightning",
+  "pendingStatus": "Ausstehend",
+  "receivedStatus": "Empfangen",
+  "sentStatus": "Gesendet",
+  "now": "Jetzt",
+  "agoMinutes": "Vor {minutes} Min",
+  "@agoMinutes": {
+    "placeholders": {
+      "minutes": { "type": "int" }
+    }
+  },
+  "agoHours": "Vor {hours} Std",
+  "@agoHours": {
+    "placeholders": {
+      "hours": { "type": "int" }
+    }
+  },
+  "agoDays": "Vor {days} Tagen",
+  "@agoDays": {
+    "placeholders": {
+      "days": { "type": "int" }
+    }
+  },
+  "lightningInvoice": "Lightning Rechnung",
+  "receivedEcash": "Ecash empfangen",
+  "sentEcash": "Ecash gesendet",
+  "outgoingLightningPayment": "Ausgehende Lightning Zahlung",
+  "invoiceNotAvailable": "Rechnung nicht verfügbar",
+  "tokenNotAvailable": "Token nicht verfügbar",
+  "unit": "Einheit",
+  "status": "Status",
+  "pending": "Ausstehend",
+  "memo": "Memo",
+  "copyInvoiceButton": "RECHNUNG KOPIEREN",
+  "copyButton": "KOPIEREN",
+  "invoiceCopied": "Rechnung kopiert",
+  "tokenCopied": "Token kopiert",
+  "speed": "GESCHWINDIGKEIT:",
+
+  "settings": "Einstellungen",
+  "walletSection": "WALLET",
+  "backupSeedPhrase": "Seed-Phrase sichern",
+  "viewRecoveryWords": "Deine Wiederherstellungswörter anzeigen",
+  "connectedMints": "Verbundene Mints",
+  "manageCashuMints": "Verwalte deine Cashu Mints",
+  "pinAccess": "PIN-Zugang",
+  "pinEnabled": "Aktiviert",
+  "protectWithPin": "App mit PIN schützen",
+  "recoverTokens": "Tokens wiederherstellen",
+  "scanMintsWithSeed": "Mints mit Seed-Phrase scannen",
+  "appearanceSection": "SPRACHE",
+  "language": "Sprache",
+  "informationSection": "INFORMATION",
+  "version": "Version",
+  "about": "Über",
+  "deleteWallet": "Wallet löschen",
+  "spanish": "Español",
+  "english": "English",
+  "portuguese": "Português",
+  "french": "Français",
+  "russian": "Русский",
+  "german": "Deutsch",
+
+  "mnemonicNotFound": "Mnemonic nicht gefunden",
+  "createPin": "PIN erstellen",
+  "enterPinDigits": "Gib eine 4-stellige PIN ein",
+  "confirmPin": "PIN bestätigen",
+  "enterPinAgain": "PIN erneut eingeben",
+  "pinMismatch": "PINs stimmen nicht überein",
+  "pinActivated": "PIN aktiviert",
+  "pinDeactivated": "PIN deaktiviert",
+  "verifyPin": "PIN überprüfen",
+  "enterCurrentPin": "Gib deine aktuelle PIN ein",
+  "incorrectPin": "Falsche PIN",
+  "selectLanguage": "Sprache auswählen",
+  "languageChanged": "Sprache geändert zu {language}",
+  "@languageChanged": {
+    "placeholders": {
+      "language": { "type": "String" }
+    }
+  },
+  "close": "Schließen",
+  "aboutDescription": "Eine Cashu Wallet mit kubanischer DNA für die ganze Welt. Bruder von La Chispa.",
+  "couldNotOpenLink": "Link konnte nicht geöffnet werden",
+
+  "deleteWalletQuestion": "Wallet löschen?",
+  "actionIrreversible": "Diese Aktion ist unwiderruflich",
+  "deleteWalletWarning": "Alle Daten werden gelöscht, einschließlich deiner Seed-Phrase und Tokens. Stelle sicher, dass du ein Backup hast.",
+  "typeDeleteToConfirm": "Gib \"LÖSCHEN\" zur Bestätigung ein:",
+  "deleteConfirmWord": "LÖSCHEN",
+  "deleteError": "Löschfehler: {error}",
+  "@deleteError": {
+    "placeholders": {
+      "error": { "type": "String" }
+    }
+  },
+
+  "recoverTokensTitle": "Tokens wiederherstellen",
+  "recoverTokensDescription": "Mints scannen, um Tokens wiederherzustellen, die mit deiner Seed-Phrase verknüpft sind (NUT-13)",
+  "useCurrentSeedPhrase": "Meine aktuelle Seed-Phrase verwenden",
+  "scanWithSavedWords": "Mints mit den gespeicherten 12 Wörtern scannen",
+  "useOtherSeedPhrase": "Andere Seed-Phrase verwenden",
+  "recoverFromOtherWords": "Tokens von anderen 12 Wörtern wiederherstellen",
+  "mintsToScan": "Zu scannende Mints:",
+  "allMints": "Alle Mints ({count})",
+  "@allMints": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "specificMint": "Ein bestimmter Mint",
+  "enterMnemonicWords": "Gib die 12 Wörter durch Leerzeichen getrennt ein...",
+  "scanMints": "Mints scannen",
+  "selectMintToScan": "Wähle einen Mint zum Scannen",
+  "mnemonicMustHaveWords": "Mnemonic muss 12 oder 24 Wörter haben",
+  "noConnectedMintsToScan": "Keine verbundenen Mints zum Scannen",
+  "recoveredTokens": "{tokens} von {mints} Mint(s) wiederhergestellt!",
+  "@recoveredTokens": {
+    "placeholders": {
+      "tokens": { "type": "String" },
+      "mints": { "type": "int" }
+    }
+  },
+  "scanCompleteNoTokens": "Scan abgeschlossen. Keine neuen Tokens gefunden.",
+  "mintsWithError": "({count} Mint(s) mit Fehler)",
+  "@mintsWithError": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "recoveredFromMint": "{tokens} von {mint} wiederhergestellt!",
+  "@recoveredFromMint": {
+    "placeholders": {
+      "tokens": { "type": "String" },
+      "mint": { "type": "String" }
+    }
+  },
+  "noTokensFoundInMint": "Keine Tokens in {mint} gefunden.",
+  "@noTokensFoundInMint": {
+    "placeholders": {
+      "mint": { "type": "String" }
+    }
+  },
+  "recoveredAndTransferred": "{amount} {unit} wiederhergestellt und in deine Wallet übertragen!",
+  "@recoveredAndTransferred": {
+    "placeholders": {
+      "amount": { "type": "String" },
+      "unit": { "type": "String" }
+    }
+  },
+  "noTokensForMnemonic": "Keine Tokens mit diesem Mnemonic verknüpft gefunden.",
+
+  "noConnectedMints": "Keine verbundenen Mints",
+  "addMintToStart": "Füge einen Mint hinzu, um zu starten",
+  "addMint": "Mint hinzufügen",
+  "mintDeleted": "Mint gelöscht",
+  "activeMintUpdated": "Aktiver Mint aktualisiert",
+  "mintUrl": "Mint URL:",
+  "mintUrlPlaceholder": "https://mint.example.com",
+  "urlMustStartWithHttps": "URL muss mit https:// beginnen",
+  "connectingToMint": "Verbinde mit Mint...",
+  "mintAddedSuccessfully": "Mint erfolgreich hinzugefügt",
+  "couldNotConnectToMint": "Verbindung zum Mint fehlgeschlagen",
+  "add": "Hinzufügen",
+
+  "success": "Erfolg",
+  "loading": "Laden...",
+  "retry": "Erneut versuchen",
+
+  "activeMint": "Aktiver Mint",
+  "mintMessage": "Mint Nachricht",
+  "url": "URL",
+  "currency": "Währung",
+  "unknown": "Unbekannt",
+  "useThisMint": "Diesen Mint verwenden",
+  "copyMintUrl": "Mint URL kopieren",
+  "deleteMint": "Mint löschen",
+  "copied": "{label} kopiert",
+  "@copied": {
+    "placeholders": {
+      "label": { "type": "String" }
+    }
+  },
+  "deleteMintConfirmTitle": "Mint löschen",
+  "deleteMintConfirmMessage": "Wenn du Guthaben auf diesem Mint hast, geht es verloren. Bist du sicher?",
+  "delete": "Löschen",
+
+  "offlineSend": "Offline senden",
+  "selectNotesToSend": "Wähle die zu sendenden Notizen:",
+  "totalToSend": "Gesamt zu senden",
+  "notesSelected": "{count} Notizen ausgewählt",
+  "@notesSelected": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "loadingProofsError": "Fehler beim Laden der Beweise: {error}",
+  "@loadingProofsError": {
+    "placeholders": {
+      "error": { "type": "String" }
+    }
+  },
+  "creatingTokenError": "Fehler beim Erstellen des Tokens: {error}",
+  "@creatingTokenError": {
+    "placeholders": {
+      "error": { "type": "String" }
+    }
+  },
+
+  "unknownState": "Unbekannter Zustand",
+  "depositAmountTitle": "{amount} {unit} einzahlen",
+  "@depositAmountTitle": {
+    "placeholders": {
+      "amount": { "type": "String" },
+      "unit": { "type": "String" }
+    }
+  },
+
+  "receiveNow": "Jetzt empfangen",
+  "receiveLater": "Später empfangen",
+  "tokenSavedForLater": "Token zum späteren Einlösen gespeichert",
+  "noConnectionTokenSaved": "Keine Verbindung. Token zum späteren Einlösen gespeichert.",
+  "unknownMintOffline": "Dieser Token stammt von einem unbekannten Mint. Verbinde dich mit dem Internet, um ihn hinzuzufügen und den Token einzulösen.",
+  "noConnectionTryLater": "Keine Verbindung zum Mint. Versuche es später erneut.",
+  "saveTokenError": "Fehler beim Speichern des Tokens. Bitte erneut versuchen.",
+  "pendingTokenLimitReached": "Limit für ausstehende Tokens erreicht (max 50)",
+  "filterToReceive": "Zu empfangen",
+  "noPendingTokens": "Keine ausstehenden Tokens",
+  "noPendingTokensHint": "Speichere Tokens zum späteren Einlösen",
+  "pendingBadge": "AUSSTEHEND",
+  "expiresInDays": "{days, plural, =1{Läuft in 1 Tag ab} other{Läuft in {days} Tagen ab}}",
+  "@expiresInDays": {
+    "placeholders": {
+      "days": { "type": "int" }
+    }
+  },
+  "retryCount": "{count} Versuche",
+  "@retryCount": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "claimNow": "Jetzt einlösen",
+  "pendingTokenClaimedSuccess": "{amount} {unit} eingelöst",
+  "@pendingTokenClaimedSuccess": {
+    "placeholders": {
+      "amount": { "type": "String" },
+      "unit": { "type": "String" }
+    }
+  },
+  "pendingTokensClaimed": "{count, plural, =1{1 Token eingelöst ({amount} {unit})} other{{count} Tokens eingelöst ({amount} {unit})}}",
+  "@pendingTokensClaimed": {
+    "placeholders": {
+      "count": { "type": "int" },
+      "amount": { "type": "String" },
+      "unit": { "type": "String" }
+    }
+  },
+
+  "scan": "Scannen",
+  "scanQrCode": "QR scannen",
+  "scanCashuToken": "Cashu Token scannen",
+  "scanLightningInvoice": "Rechnung scannen",
+  "scanningAnimatedQr": "Animierten QR scannen...",
+  "pointCameraAtQr": "Richte die Kamera auf den QR-Code",
+  "pointCameraAtCashuQr": "Richte die Kamera auf den Cashu Token QR",
+  "pointCameraAtInvoiceQr": "Richte die Kamera auf den Rechnungs-QR",
+  "unrecognizedQrCode": "Nicht erkannter QR-Code",
+  "scanCashuTokenHint": "Scanne einen Cashu Token (cashuA... oder cashuB...)",
+  "scanLightningInvoiceHint": "Scanne eine Lightning Rechnung (lnbc...)",
+  "addMintQuestion": "Diesen Mint hinzufügen?",
+  "cameraPermissionDenied": "Kamera-Berechtigung verweigert",
+  "paymentRequestNotSupported": "Zahlungsanfragen werden noch nicht unterstützt"
+}
