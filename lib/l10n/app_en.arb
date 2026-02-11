@@ -211,6 +211,7 @@
   "english": "English",
   "portuguese": "Português",
   "french": "Français",
+  "russian": "Русский",
 
   "mnemonicNotFound": "Mnemonic not found",
   "createPin": "Create PIN",

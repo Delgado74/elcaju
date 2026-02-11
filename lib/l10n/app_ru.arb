@@ -1,0 +1,483 @@
+{
+  "@@locale": "ru",
+
+  "appName": "ElCaju",
+  "appTagline": "Ваш приватный ecash кошелёк",
+  "loadingMessage1": "Шифрование ваших монет...",
+  "loadingMessage2": "Подготовка ваших e-токенов...",
+  "loadingMessage3": "Подключение к Mint...",
+  "loadingMessage4": "Конфиденциальность по умолчанию.",
+  "loadingMessage5": "Слепая подпись токенов...",
+  "loadingMessage6": "Go full Calle...",
+  "loadingMessage7": "Cashu + Bitchat = Конфиденциальность + Свобода",
+  "aboutTagline": "Конфиденциальность без границ.",
+
+  "welcomeTitle": "Добро пожаловать в ElCaju",
+  "welcomeSubtitle": "Cashu для мира. Сделано на Кубе.",
+
+  "createWallet": "Создать новый кошелёк",
+  "restoreWallet": "Восстановить кошелёк",
+
+  "createWalletTitle": "Создать кошелёк",
+  "creatingWallet": "Создание вашего кошелька...",
+  "generatingSeed": "Безопасная генерация вашей сид-фразы",
+  "createWalletDescription": "Будет сгенерирована сид-фраза из 12 слов.\nСохраните её в безопасном месте.",
+  "generateWallet": "Создать кошелёк",
+
+  "walletCreated": "Кошелёк создан!",
+  "walletCreatedDescription": "Ваш кошелёк готов. Рекомендуем сделать резервную копию сид-фразы сейчас.",
+  "backupWarning": "Без резервной копии вы потеряете доступ к средствам при потере устройства.",
+  "backupNow": "Сделать резервную копию",
+  "backupLater": "Сделать позже",
+
+  "backupTitle": "Резервная копия",
+  "seedPhraseTitle": "Ваша сид-фраза",
+  "seedPhraseDescription": "Сохраните эти 12 слов по порядку. Это единственный способ восстановить кошелёк.",
+  "revealSeedPhrase": "Показать сид-фразу",
+  "tapToReveal": "Нажмите кнопку, чтобы показать\nвашу сид-фразу",
+  "copyToClipboard": "Копировать в буфер обмена",
+  "seedCopied": "Фраза скопирована в буфер обмена",
+  "neverShareSeed": "Никогда не делитесь сид-фразой ни с кем.",
+  "confirmBackup": "Я сохранил сид-фразу в безопасном месте",
+  "continue_": "Продолжить",
+
+  "restoreTitle": "Восстановить кошелёк",
+  "enterSeedPhrase": "Введите вашу сид-фразу",
+  "enterSeedDescription": "Введите 12 или 24 слова через пробел.",
+  "seedPlaceholder": "слово1 слово2 слово3 ...",
+  "wordCount": "{count} слов",
+  "@wordCount": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "needWords": "(нужно 12 или 24)",
+  "restoreError": "Ошибка восстановления: {error}",
+  "@restoreError": {
+    "placeholders": {
+      "error": { "type": "String" }
+    }
+  },
+
+  "homeTitle": "Главная",
+  "receive": "Получить",
+  "send": "Отправить",
+  "sendAction": "Отправить ↗",
+  "receiveAction": "↘ Получить",
+  "deposit": "Пополнить",
+  "withdraw": "Вывести",
+  "lightning": "Lightning",
+  "cashu": "Cashu",
+  "ecash": "Ecash",
+  "history": "История",
+  "noTransactions": "Нет транзакций",
+  "depositOrReceive": "Пополните или получите sats для начала",
+  "noMint": "Нет mint",
+
+  "balance": "Баланс",
+  "sats": "sats",
+
+  "pasteEcashToken": "Вставить ecash токен",
+  "generateInvoiceToDeposit": "Создать счёт для пополнения",
+  "createEcashToken": "Создать ecash токен",
+  "payLightningInvoice": "Оплатить Lightning счёт",
+
+  "receiveCashu": "Получить Cashu",
+  "pasteTheCashuToken": "Вставьте Cashu токен:",
+  "pasteFromClipboard": "Вставить из буфера обмена",
+  "validToken": "Токен действителен",
+  "invalidToken": "Недействительный или повреждённый токен",
+  "amount": "Сумма:",
+  "mint": "Mint:",
+  "claiming": "Получение...",
+  "claimTokens": "Получить токены",
+  "tokensReceived": "Токены получены",
+  "backToHome": "Вернуться на главную",
+  "tokenAlreadyClaimed": "Этот токен уже был получен",
+  "unknownMint": "Токен от неизвестного mint",
+  "claimError": "Ошибка получения: {error}",
+  "@claimError": {
+    "placeholders": {
+      "error": { "type": "String" }
+    }
+  },
+
+  "sendCashu": "Отправить Cashu",
+  "selectNotesManually": "Выбрать заметки вручную",
+  "amountToSend": "Сумма для отправки:",
+  "available": "Доступно:",
+  "max": "(Макс)",
+  "memoOptional": "Заметка (необязательно):",
+  "memoPlaceholder": "Для чего этот платёж?",
+  "creatingToken": "Создание токена...",
+  "createToken": "Создать токен",
+  "noActiveMint": "Нет активного mint",
+  "offlineModeMessage": "Нет соединения. Офлайн режим...",
+  "confirmSend": "Подтвердить отправку",
+  "confirm": "Подтвердить",
+  "cancel": "Отмена",
+  "insufficientBalance": "Недостаточный баланс",
+  "tokenCreationError": "Ошибка создания токена: {error}",
+  "@tokenCreationError": {
+    "placeholders": {
+      "error": { "type": "String" }
+    }
+  },
+
+  "tokenCreated": "Токен создан",
+  "copy": "Копировать",
+  "share": "Поделиться",
+  "tokenCashu": "Cashu токен",
+  "tokenCashuAnimatedQr": "Cashu токен (анимированный QR - {fragments} UR фрагментов)",
+  "@tokenCashuAnimatedQr": {
+    "placeholders": {
+      "fragments": { "type": "int" }
+    }
+  },
+  "keepTokenWarning": "Сохраните этот токен, пока получатель не заберёт его. Если потеряете — потеряете средства.",
+  "tokenCopiedToClipboard": "Токен скопирован в буфер обмена",
+
+  "amountToDeposit": "Сумма для пополнения:",
+  "descriptionOptional": "Описание (необязательно):",
+  "depositPlaceholder": "Для чего это пополнение?",
+  "generating": "Генерация...",
+  "generateInvoice": "Создать счёт",
+  "depositLightning": "Пополнить Lightning",
+
+  "payInvoiceTitle": "Оплатить счёт",
+  "generatingInvoice": "Создание счёта...",
+  "waitingForPayment": "Ожидание оплаты...",
+  "paymentReceived": "Платёж получен",
+  "tokensIssued": "Токены выпущены!",
+  "error": "Ошибка",
+  "unknownError": "Неизвестная ошибка",
+  "back": "Назад",
+  "copyInvoice": "Копировать счёт",
+  "description": "Описание:",
+  "invoiceCopiedToClipboard": "Счёт скопирован в буфер обмена",
+  "deposited": "{amount} {unit} пополнено",
+  "@deposited": {
+    "placeholders": {
+      "amount": { "type": "String" },
+      "unit": { "type": "String" }
+    }
+  },
+
+  "pasteLightningInvoice": "Вставьте Lightning счёт:",
+  "gettingQuote": "Получение котировки...",
+  "validInvoice": "Счёт действителен",
+  "invalidInvoice": "Недействительный счёт",
+  "invalidInvoiceMalformed": "Недействительный или повреждённый счёт",
+  "feeReserved": "Зарезервированная комиссия:",
+  "total": "Итого:",
+  "paying": "Оплата...",
+  "payInvoice": "Оплатить счёт",
+  "confirmPayment": "Подтвердить оплату",
+  "pay": "Оплатить",
+  "fee": "комиссия",
+  "invoiceExpired": "Счёт истёк",
+  "amountOutOfRange": "Сумма вне допустимого диапазона",
+  "resolvingType": "Разрешение {type}...",
+  "@resolvingType": {
+    "placeholders": {
+      "type": { "type": "String" }
+    }
+  },
+  "invoiceAlreadyPaid": "Счёт уже оплачен",
+  "paymentError": "Ошибка оплаты: {error}",
+  "@paymentError": {
+    "placeholders": {
+      "error": { "type": "String" }
+    }
+  },
+  "sent": "{amount} {unit} отправлено",
+  "@sent": {
+    "placeholders": {
+      "amount": { "type": "String" },
+      "unit": { "type": "String" }
+    }
+  },
+
+  "filterAll": "Все",
+  "filterPending": "Ожидающие",
+  "filterEcash": "Ecash",
+  "filterLightning": "Lightning",
+  "receiveTokensToStart": "Получите Cashu токены для начала",
+  "noPendingTransactions": "Нет ожидающих транзакций",
+  "allTransactionsCompleted": "Все ваши транзакции завершены",
+  "noEcashTransactions": "Нет Ecash транзакций",
+  "sendOrReceiveTokens": "Отправьте или получите Cashu токены",
+  "noLightningTransactions": "Нет Lightning транзакций",
+  "depositOrWithdrawLightning": "Пополните или выведите через Lightning",
+  "pendingStatus": "Ожидание",
+  "receivedStatus": "Получено",
+  "sentStatus": "Отправлено",
+  "now": "Сейчас",
+  "agoMinutes": "{minutes} мин назад",
+  "@agoMinutes": {
+    "placeholders": {
+      "minutes": { "type": "int" }
+    }
+  },
+  "agoHours": "{hours} ч назад",
+  "@agoHours": {
+    "placeholders": {
+      "hours": { "type": "int" }
+    }
+  },
+  "agoDays": "{days} дней назад",
+  "@agoDays": {
+    "placeholders": {
+      "days": { "type": "int" }
+    }
+  },
+  "lightningInvoice": "Lightning счёт",
+  "receivedEcash": "Ecash получен",
+  "sentEcash": "Ecash отправлен",
+  "outgoingLightningPayment": "Исходящий Lightning платёж",
+  "invoiceNotAvailable": "Счёт недоступен",
+  "tokenNotAvailable": "Токен недоступен",
+  "unit": "Единица",
+  "status": "Статус",
+  "pending": "Ожидание",
+  "memo": "Заметка",
+  "copyInvoiceButton": "КОПИРОВАТЬ СЧЁТ",
+  "copyButton": "КОПИРОВАТЬ",
+  "invoiceCopied": "Счёт скопирован",
+  "tokenCopied": "Токен скопирован",
+  "speed": "СКОРОСТЬ:",
+
+  "settings": "Настройки",
+  "walletSection": "КОШЕЛЁК",
+  "backupSeedPhrase": "Резервная копия сид-фразы",
+  "viewRecoveryWords": "Посмотреть слова восстановления",
+  "connectedMints": "Подключённые mint",
+  "manageCashuMints": "Управление вашими Cashu mint",
+  "pinAccess": "PIN-код",
+  "pinEnabled": "Включён",
+  "protectWithPin": "Защитить приложение PIN-кодом",
+  "recoverTokens": "Восстановить токены",
+  "scanMintsWithSeed": "Сканировать mint с сид-фразой",
+  "appearanceSection": "ЯЗЫК",
+  "language": "Язык",
+  "informationSection": "ИНФОРМАЦИЯ",
+  "version": "Версия",
+  "about": "О приложении",
+  "deleteWallet": "Удалить кошелёк",
+  "spanish": "Español",
+  "english": "English",
+  "portuguese": "Português",
+  "french": "Français",
+  "russian": "Русский",
+
+  "mnemonicNotFound": "Мнемоника не найдена",
+  "createPin": "Создать PIN",
+  "enterPinDigits": "Введите 4-значный PIN",
+  "confirmPin": "Подтвердить PIN",
+  "enterPinAgain": "Введите PIN ещё раз",
+  "pinMismatch": "PIN-коды не совпадают",
+  "pinActivated": "PIN активирован",
+  "pinDeactivated": "PIN деактивирован",
+  "verifyPin": "Проверить PIN",
+  "enterCurrentPin": "Введите текущий PIN",
+  "incorrectPin": "Неверный PIN",
+  "selectLanguage": "Выбрать язык",
+  "languageChanged": "Язык изменён на {language}",
+  "@languageChanged": {
+    "placeholders": {
+      "language": { "type": "String" }
+    }
+  },
+  "close": "Закрыть",
+  "aboutDescription": "Cashu кошелёк с кубинской ДНК для всего мира. Брат La Chispa.",
+  "couldNotOpenLink": "Не удалось открыть ссылку",
+
+  "deleteWalletQuestion": "Удалить кошелёк?",
+  "actionIrreversible": "Это действие необратимо",
+  "deleteWalletWarning": "Все данные будут удалены, включая сид-фразу и токены. Убедитесь, что у вас есть резервная копия.",
+  "typeDeleteToConfirm": "Введите \"УДАЛИТЬ\" для подтверждения:",
+  "deleteConfirmWord": "УДАЛИТЬ",
+  "deleteError": "Ошибка удаления: {error}",
+  "@deleteError": {
+    "placeholders": {
+      "error": { "type": "String" }
+    }
+  },
+
+  "recoverTokensTitle": "Восстановить токены",
+  "recoverTokensDescription": "Сканировать mint для восстановления токенов, связанных с вашей сид-фразой (NUT-13)",
+  "useCurrentSeedPhrase": "Использовать текущую сид-фразу",
+  "scanWithSavedWords": "Сканировать mint с сохранёнными 12 словами",
+  "useOtherSeedPhrase": "Использовать другую сид-фразу",
+  "recoverFromOtherWords": "Восстановить токены из других 12 слов",
+  "mintsToScan": "Mint для сканирования:",
+  "allMints": "Все mint ({count})",
+  "@allMints": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "specificMint": "Конкретный mint",
+  "enterMnemonicWords": "Введите 12 слов через пробел...",
+  "scanMints": "Сканировать mint",
+  "selectMintToScan": "Выберите mint для сканирования",
+  "mnemonicMustHaveWords": "Мнемоника должна содержать 12 или 24 слова",
+  "noConnectedMintsToScan": "Нет подключённых mint для сканирования",
+  "recoveredTokens": "Восстановлено {tokens} из {mints} mint!",
+  "@recoveredTokens": {
+    "placeholders": {
+      "tokens": { "type": "String" },
+      "mints": { "type": "int" }
+    }
+  },
+  "scanCompleteNoTokens": "Сканирование завершено. Новых токенов не найдено.",
+  "mintsWithError": "({count} mint с ошибкой)",
+  "@mintsWithError": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "recoveredFromMint": "Восстановлено {tokens} из {mint}!",
+  "@recoveredFromMint": {
+    "placeholders": {
+      "tokens": { "type": "String" },
+      "mint": { "type": "String" }
+    }
+  },
+  "noTokensFoundInMint": "Токены не найдены в {mint}.",
+  "@noTokensFoundInMint": {
+    "placeholders": {
+      "mint": { "type": "String" }
+    }
+  },
+  "recoveredAndTransferred": "Восстановлено и переведено {amount} {unit} в ваш кошелёк!",
+  "@recoveredAndTransferred": {
+    "placeholders": {
+      "amount": { "type": "String" },
+      "unit": { "type": "String" }
+    }
+  },
+  "noTokensForMnemonic": "Токены, связанные с этой мнемоникой, не найдены.",
+
+  "noConnectedMints": "Нет подключённых mint",
+  "addMintToStart": "Добавьте mint для начала",
+  "addMint": "Добавить mint",
+  "mintDeleted": "Mint удалён",
+  "activeMintUpdated": "Активный mint обновлён",
+  "mintUrl": "URL mint:",
+  "mintUrlPlaceholder": "https://mint.example.com",
+  "urlMustStartWithHttps": "URL должен начинаться с https://",
+  "connectingToMint": "Подключение к mint...",
+  "mintAddedSuccessfully": "Mint успешно добавлен",
+  "couldNotConnectToMint": "Не удалось подключиться к mint",
+  "add": "Добавить",
+
+  "success": "Успех",
+  "loading": "Загрузка...",
+  "retry": "Повторить",
+
+  "activeMint": "Активный mint",
+  "mintMessage": "Сообщение Mint",
+  "url": "URL",
+  "currency": "Валюта",
+  "unknown": "Неизвестно",
+  "useThisMint": "Использовать этот mint",
+  "copyMintUrl": "Копировать URL mint",
+  "deleteMint": "Удалить mint",
+  "copied": "{label} скопировано",
+  "@copied": {
+    "placeholders": {
+      "label": { "type": "String" }
+    }
+  },
+  "deleteMintConfirmTitle": "Удалить mint",
+  "deleteMintConfirmMessage": "Если у вас есть баланс на этом mint, он будет потерян. Вы уверены?",
+  "delete": "Удалить",
+
+  "offlineSend": "Офлайн отправка",
+  "selectNotesToSend": "Выберите заметки для отправки:",
+  "totalToSend": "Итого к отправке",
+  "notesSelected": "{count} заметок выбрано",
+  "@notesSelected": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "loadingProofsError": "Ошибка загрузки доказательств: {error}",
+  "@loadingProofsError": {
+    "placeholders": {
+      "error": { "type": "String" }
+    }
+  },
+  "creatingTokenError": "Ошибка создания токена: {error}",
+  "@creatingTokenError": {
+    "placeholders": {
+      "error": { "type": "String" }
+    }
+  },
+
+  "unknownState": "Неизвестное состояние",
+  "depositAmountTitle": "Пополнить {amount} {unit}",
+  "@depositAmountTitle": {
+    "placeholders": {
+      "amount": { "type": "String" },
+      "unit": { "type": "String" }
+    }
+  },
+
+  "receiveNow": "Получить сейчас",
+  "receiveLater": "Получить позже",
+  "tokenSavedForLater": "Токен сохранён для получения позже",
+  "noConnectionTokenSaved": "Нет соединения. Токен сохранён для получения позже.",
+  "unknownMintOffline": "Этот токен от неизвестного mint. Подключитесь к интернету, чтобы добавить его и получить токен.",
+  "noConnectionTryLater": "Нет соединения с mint. Попробуйте позже.",
+  "saveTokenError": "Ошибка сохранения токена. Попробуйте снова.",
+  "pendingTokenLimitReached": "Достигнут лимит ожидающих токенов (макс 50)",
+  "filterToReceive": "К получению",
+  "noPendingTokens": "Нет ожидающих токенов",
+  "noPendingTokensHint": "Сохраните токены для получения позже",
+  "pendingBadge": "ОЖИДАНИЕ",
+  "expiresInDays": "{days, plural, =1{Истекает через 1 день} other{Истекает через {days} дней}}",
+  "@expiresInDays": {
+    "placeholders": {
+      "days": { "type": "int" }
+    }
+  },
+  "retryCount": "{count} попыток",
+  "@retryCount": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "claimNow": "Получить сейчас",
+  "pendingTokenClaimedSuccess": "Получено {amount} {unit}",
+  "@pendingTokenClaimedSuccess": {
+    "placeholders": {
+      "amount": { "type": "String" },
+      "unit": { "type": "String" }
+    }
+  },
+  "pendingTokensClaimed": "{count, plural, =1{Получен 1 токен ({amount} {unit})} other{Получено {count} токенов ({amount} {unit})}}",
+  "@pendingTokensClaimed": {
+    "placeholders": {
+      "count": { "type": "int" },
+      "amount": { "type": "String" },
+      "unit": { "type": "String" }
+    }
+  },
+
+  "scan": "Сканировать",
+  "scanQrCode": "Сканировать QR",
+  "scanCashuToken": "Сканировать Cashu токен",
+  "scanLightningInvoice": "Сканировать счёт",
+  "scanningAnimatedQr": "Сканирование анимированного QR...",
+  "pointCameraAtQr": "Наведите камеру на QR-код",
+  "pointCameraAtCashuQr": "Наведите камеру на QR Cashu токена",
+  "pointCameraAtInvoiceQr": "Наведите камеру на QR счёта",
+  "unrecognizedQrCode": "Нераспознанный QR-код",
+  "scanCashuTokenHint": "Сканируйте Cashu токен (cashuA... или cashuB...)",
+  "scanLightningInvoiceHint": "Сканируйте Lightning счёт (lnbc...)",
+  "addMintQuestion": "Добавить этот mint?",
+  "cameraPermissionDenied": "Доступ к камере запрещён",
+  "paymentRequestNotSupported": "Запросы на оплату пока не поддерживаются"
+}
