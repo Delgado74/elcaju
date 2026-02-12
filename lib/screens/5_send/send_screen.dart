@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:lucide_icons/lucide_icons.dart';
@@ -11,6 +12,7 @@ import '../../widgets/common/glass_card.dart';
 import '../../widgets/common/primary_button.dart';
 import '../../widgets/common/numpad_widget.dart';
 import '../../providers/wallet_provider.dart';
+import '../../core/utils/nostr_utils.dart';
 import 'share_token_screen.dart';
 import 'offline_send_screen.dart';
 
@@ -24,12 +26,17 @@ class SendScreen extends StatefulWidget {
 
 class _SendScreenState extends State<SendScreen> {
   final TextEditingController _memoController = TextEditingController();
+  final TextEditingController _pubkeyController = TextEditingController();
 
   String _amountValue = '';
   bool _isProcessing = false;
   String? _errorMessage;
   BigInt _availableBalance = BigInt.zero;
   late String _activeUnit;
+
+  // P2PK
+  bool _useP2PK = false;
+  String? _pubkeyError;
 
   @override
   void initState() {
@@ -51,6 +58,7 @@ class _SendScreenState extends State<SendScreen> {
   @override
   void dispose() {
     _memoController.dispose();
+    _pubkeyController.dispose();
     super.dispose();
   }
 
@@ -108,6 +116,11 @@ class _SendScreenState extends State<SendScreen> {
 
                       // Memo opcional
                       _buildMemoSection(),
+
+                      const SizedBox(height: AppDimensions.paddingMedium),
+
+                      // P2PK (bloquear a clave pública)
+                      _buildP2PKSection(),
 
                       const SizedBox(height: AppDimensions.paddingMedium),
 
@@ -260,6 +273,160 @@ class _SendScreenState extends State<SendScreen> {
     );
   }
 
+  Widget _buildP2PKSection() {
+    final l10n = L10n.of(context)!;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // Toggle P2PK
+        GlassCard(
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppDimensions.paddingMedium,
+            vertical: AppDimensions.paddingSmall,
+          ),
+          child: Row(
+            children: [
+              Icon(
+                LucideIcons.lock,
+                color: _useP2PK ? AppColors.primaryAction : AppColors.textSecondary,
+                size: 20,
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      l10n.p2pkLockToKey,
+                      style: const TextStyle(
+                        fontFamily: 'Inter',
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white,
+                      ),
+                    ),
+                    Text(
+                      l10n.p2pkLockDescription,
+                      style: TextStyle(
+                        fontFamily: 'Inter',
+                        fontSize: 12,
+                        color: AppColors.textSecondary.withValues(alpha: 0.7),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Switch(
+                value: _useP2PK,
+                onChanged: (value) {
+                  setState(() {
+                    _useP2PK = value;
+                    if (!value) {
+                      _pubkeyController.clear();
+                      _pubkeyError = null;
+                    }
+                  });
+                },
+                activeColor: AppColors.primaryAction,
+              ),
+            ],
+          ),
+        ),
+
+        // Campo pubkey (visible solo si P2PK está activo)
+        if (_useP2PK) ...[
+          const SizedBox(height: AppDimensions.paddingSmall),
+
+          GlassCard(
+            padding: const EdgeInsets.all(AppDimensions.paddingSmall),
+            child: TextField(
+              controller: _pubkeyController,
+              style: const TextStyle(
+                fontFamily: 'Inter',
+                fontSize: 14,
+                color: Colors.white,
+              ),
+              decoration: InputDecoration(
+                hintText: l10n.p2pkReceiverPubkey,
+                hintStyle: TextStyle(
+                  fontFamily: 'Inter',
+                  fontSize: 14,
+                  color: Colors.white.withValues(alpha: 0.3),
+                ),
+                border: InputBorder.none,
+                errorText: _pubkeyError,
+                errorStyle: const TextStyle(
+                  fontFamily: 'Inter',
+                  fontSize: 12,
+                  color: AppColors.error,
+                ),
+                prefixIcon: Icon(
+                  LucideIcons.key,
+                  color: AppColors.textSecondary.withValues(alpha: 0.5),
+                  size: 18,
+                ),
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    LucideIcons.clipboard,
+                    color: AppColors.textSecondary.withValues(alpha: 0.5),
+                    size: 18,
+                  ),
+                  onPressed: _pastePubkey,
+                ),
+              ),
+              onChanged: _validatePubkey,
+            ),
+          ),
+
+          const SizedBox(height: AppDimensions.paddingSmall),
+
+          // Advertencia experimental
+          Row(
+            children: [
+              Icon(
+                LucideIcons.alertTriangle,
+                size: 14,
+                color: AppColors.warning.withValues(alpha: 0.8),
+              ),
+              const SizedBox(width: 6),
+              Expanded(
+                child: Text(
+                  l10n.p2pkExperimental,
+                  style: TextStyle(
+                    fontFamily: 'Inter',
+                    fontSize: 11,
+                    color: AppColors.warning.withValues(alpha: 0.8),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ],
+    );
+  }
+
+  void _validatePubkey(String value) {
+    if (value.isEmpty) {
+      setState(() => _pubkeyError = null);
+      return;
+    }
+
+    final isValid = NostrUtils.isValidP2PKPubkey(value);
+    setState(() {
+      _pubkeyError = isValid ? null : L10n.of(context)!.p2pkInvalidPubkey;
+    });
+  }
+
+  Future<void> _pastePubkey() async {
+    final clipboardData = await Clipboard.getData(Clipboard.kTextPlain);
+    if (clipboardData?.text != null) {
+      _pubkeyController.text = clipboardData!.text!;
+      _validatePubkey(clipboardData.text!);
+    }
+  }
+
   Widget _buildErrorMessage() {
     return Container(
       margin: const EdgeInsets.only(bottom: AppDimensions.paddingMedium),
@@ -297,9 +464,13 @@ class _SendScreenState extends State<SendScreen> {
 
   Widget _buildCreateButton() {
     final l10n = L10n.of(context)!;
+    // Si P2PK está habilitado, también debe haber una pubkey válida
+    final isP2PKValid = !_useP2PK ||
+        (_pubkeyController.text.isNotEmpty && _pubkeyError == null);
+    final canCreate = _isValidAmount && !_isProcessing && isP2PKValid;
     return PrimaryButton(
       text: _isProcessing ? l10n.creatingToken : l10n.createToken,
-      onPressed: _isValidAmount && !_isProcessing ? _showConfirmation : null,
+      onPressed: canCreate ? _showConfirmation : null,
     );
   }
 
@@ -359,6 +530,13 @@ class _SendScreenState extends State<SendScreen> {
     });
 
     if (!isOnline) {
+      // P2PK requiere conexión al mint
+      if (_useP2PK) {
+        setState(() {
+          _errorMessage = L10n.of(context)!.p2pkRequiresConnection;
+        });
+        return;
+      }
       // Offline: ir directo a selección de monedas
       _goToOfflineModeWithMessage();
       return;
@@ -405,7 +583,24 @@ class _SendScreenState extends State<SendScreen> {
       // Crear token real con cdk-flutter
       final memo = _memoController.text.isNotEmpty ? _memoController.text : null;
       final amount = _amount;
-      final token = await walletProvider.sendTokens(amount, memo);
+
+      String token;
+
+      // P2PK: bloquear a clave pública si está habilitado
+      if (_useP2PK && _pubkeyController.text.isNotEmpty) {
+        // Usar normalizeToCompressedHex para obtener formato SEC1 (66 chars)
+        final pubkeyHex = NostrUtils.normalizeToCompressedHex(_pubkeyController.text);
+        debugPrint('[SendScreen] P2PK enabled, pubkeyHex: $pubkeyHex');
+        if (pubkeyHex == null) {
+          throw Exception(L10n.of(context)!.p2pkInvalidPubkey);
+        }
+        debugPrint('[SendScreen] Calling sendTokensP2pk with amount: $amount, pubkey: ${pubkeyHex.length > 16 ? pubkeyHex.substring(0, 16) : pubkeyHex}...');
+        token = await walletProvider.sendTokensP2pk(amount, pubkeyHex, memo);
+        debugPrint('[SendScreen] Token P2PK creado exitosamente!');
+      } else {
+        debugPrint('[SendScreen] Sending normal token, amount: $amount');
+        token = await walletProvider.sendTokens(amount, memo);
+      }
 
       if (mounted) {
         Navigator.pushReplacement(
@@ -420,7 +615,9 @@ class _SendScreenState extends State<SendScreen> {
           ),
         );
       }
-    } catch (e) {
+    } catch (e, stackTrace) {
+      debugPrint('[SendScreen] ERROR creating token: $e');
+      debugPrint('[SendScreen] Stack trace: $stackTrace');
       final errorStr = e.toString().toLowerCase();
 
       // Detectar errores de red y redirigir a modo offline

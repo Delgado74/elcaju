@@ -9,6 +9,7 @@ import '../../widgets/common/primary_button.dart';
 import '../../widgets/common/glass_card.dart';
 import '../../providers/wallet_provider.dart';
 import '../../providers/settings_provider.dart';
+import '../../providers/p2pk_provider.dart';
 import '../3_home/home_screen.dart';
 
 /// Pantalla de restauración de wallet
@@ -58,6 +59,7 @@ class _RestoreWalletScreenState extends State<RestoreWalletScreen> {
       final mnemonic = _seedController.text.trim().toLowerCase();
       final walletProvider = context.read<WalletProvider>();
       final settingsProvider = context.read<SettingsProvider>();
+      final p2pkProvider = context.read<P2PKProvider>();
 
       // Guardar mnemonic de forma segura
       await settingsProvider.saveMnemonic(mnemonic);
@@ -65,6 +67,13 @@ class _RestoreWalletScreenState extends State<RestoreWalletScreen> {
       // Inicializar wallet (esto valida el mnemonic internamente)
       // Si el mnemonic es inválido, cdk_flutter lanzará una excepción
       await walletProvider.initialize(mnemonic);
+
+      // Inicializar P2PK (derivar clave principal del mnemonic)
+      try {
+        await p2pkProvider.initialize(mnemonic);
+      } catch (e) {
+        debugPrint('[RestoreWalletScreen] Error initializing P2PK (non-fatal): $e');
+      }
 
       if (mounted) {
         Navigator.pushAndRemoveUntil(
