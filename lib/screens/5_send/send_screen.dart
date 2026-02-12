@@ -572,6 +572,8 @@ class _SendScreenState extends State<SendScreen> {
   }
 
   Future<void> _createToken() async {
+    final l10n = L10n.of(context)!;
+
     setState(() {
       _isProcessing = true;
       _errorMessage = null;
@@ -579,7 +581,6 @@ class _SendScreenState extends State<SendScreen> {
 
     try {
       final walletProvider = context.read<WalletProvider>();
-      final l10n = L10n.of(context)!;
 
       // Crear token real con cdk-flutter
       final memo = _memoController.text.isNotEmpty ? _memoController.text : null;
@@ -640,13 +641,15 @@ class _SendScreenState extends State<SendScreen> {
         return;
       }
 
-      setState(() {
-        if (errorStr.contains('insufficient') || errorStr.contains('not enough')) {
-          _errorMessage = L10n.of(context)!.insufficientBalance;
-        } else {
-          _errorMessage = L10n.of(context)!.tokenCreationError(e.toString());
-        }
-      });
+      if (mounted) {
+        setState(() {
+          if (errorStr.contains('insufficient') || errorStr.contains('not enough')) {
+            _errorMessage = l10n.insufficientBalance;
+          } else {
+            _errorMessage = l10n.tokenCreationError(e.toString());
+          }
+        });
+      }
     } finally {
       if (mounted) {
         setState(() {
