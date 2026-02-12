@@ -158,10 +158,15 @@ class _P2PKKeysScreenState extends State<P2PKKeysScreen> {
   }
 
   Widget _buildKeyCard(P2PKKey key, P2PKProvider provider, L10n l10n) {
-    final npub = NostrUtils.hexToNpub(key.publicKey);
-    final truncatedNpub = npub != null
-        ? '${npub.substring(0, 12)}...${npub.substring(npub.length - 8)}'
-        : key.publicKey.substring(0, 16);
+    String truncatedNpub;
+    try {
+      final npub = NostrUtils.hexToNpub(key.publicKey);
+      truncatedNpub = '${npub.substring(0, 12)}...${npub.substring(npub.length - 8)}';
+    } catch (_) {
+      truncatedNpub = key.publicKey.length > 16
+          ? '${key.publicKey.substring(0, 16)}...'
+          : key.publicKey;
+    }
 
     return GlassCard(
       padding: const EdgeInsets.all(AppDimensions.paddingMedium),
@@ -210,16 +215,15 @@ class _P2PKKeysScreenState extends State<P2PKKeysScreen> {
           // npub (tap to copy)
           GestureDetector(
             onTap: () {
-              if (npub != null) {
-                Clipboard.setData(ClipboardData(text: npub));
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(l10n.copied('npub')),
-                    duration: const Duration(seconds: 2),
-                    backgroundColor: AppColors.success,
-                  ),
-                );
-              }
+              final fullNpub = _safeNpub(key.publicKey);
+              Clipboard.setData(ClipboardData(text: fullNpub));
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(l10n.copied('npub')),
+                  duration: const Duration(seconds: 2),
+                  backgroundColor: AppColors.success,
+                ),
+              );
             },
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
@@ -391,7 +395,7 @@ class _P2PKKeysScreenState extends State<P2PKKeysScreen> {
   // ============ DIÁLOGOS ============
 
   void _showQRDialog(P2PKKey key, L10n l10n) {
-    final npub = NostrUtils.hexToNpub(key.publicKey) ?? key.publicKey;
+    final npub = _safeNpub(key.publicKey);
 
     showDialog(
       context: context,
@@ -735,6 +739,15 @@ class _P2PKKeysScreenState extends State<P2PKKeysScreen> {
         ],
       ),
     );
+  }
+
+  /// Convierte hex a npub de forma segura, retornando el hex como fallback.
+  String _safeNpub(String hex) {
+    try {
+      return NostrUtils.hexToNpub(hex);
+    } catch (_) {
+      return hex;
+    }
   }
 
   String _getErrorMessage(P2PKErrorCode code, L10n l10n) {
