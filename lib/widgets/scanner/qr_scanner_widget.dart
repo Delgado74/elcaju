@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:lucide_icons/lucide_icons.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:elcaju/generated/app_localizations.dart';
 import 'package:cdk_flutter/cdk_flutter.dart';
 import '../../core/constants/colors.dart';
-import '../../core/utils/incoming_data_parser.dart';
 
 /// Widget reutilizable para escanear QR codes
 /// Soporta QR estáticos y animados (UR multipartes)
@@ -39,7 +38,7 @@ class _QrScannerWidgetState extends State<QrScannerWidget> {
   // Estado para QR animados (UR multipartes) usando TokenDecoder de cdk-flutter
   TokenDecoder? _urDecoder;
   bool _isCapturingUr = false;
-  final Set<String> _urFragmentsSeen = {};  // Trackear fragmentos únicos
+  final Set<String> _urFragmentsSeen = {}; // Trackear fragmentos únicos
 
   // Evitar procesar el mismo código múltiples veces
   String? _lastProcessedCode;
@@ -272,10 +271,10 @@ class _QrScannerWidgetState extends State<QrScannerWidget> {
       top: alignment == Alignment.topLeft || alignment == Alignment.topRight
           ? 0
           : null,
-      bottom:
-          alignment == Alignment.bottomLeft || alignment == Alignment.bottomRight
-              ? 0
-              : null,
+      bottom: alignment == Alignment.bottomLeft ||
+              alignment == Alignment.bottomRight
+          ? 0
+          : null,
       left: alignment == Alignment.topLeft || alignment == Alignment.bottomLeft
           ? 0
           : null,
