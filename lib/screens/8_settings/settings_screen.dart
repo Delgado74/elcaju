@@ -85,7 +85,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         value: settingsProvider.pinEnabled,
                         onChanged: (value) =>
                             _togglePin(context, settingsProvider, value),
-                        activeColor: AppColors.primaryAction,
+                        activeThumbColor: AppColors.primaryAction,
                       ),
                     ),
                     _buildSettingTile(
@@ -1665,7 +1665,6 @@ class _RecoverTokensModalState extends State<_RecoverTokensModal> {
           // Escanear todos los mints (retorna Map<String, Map<String, BigInt>>)
           final results = await walletProvider.restoreAllMints();
 
-          BigInt totalRecovered = BigInt.zero;
           int mintsScanned = 0;
           int mintsWithError = 0;
           final recoveredDetails = <String>[];
@@ -1673,7 +1672,6 @@ class _RecoverTokensModalState extends State<_RecoverTokensModal> {
           for (final mintEntry in results.entries) {
             final unitBalances = mintEntry.value;
             bool hasError = false;
-            BigInt mintTotal = BigInt.zero;
 
             for (final unitEntry in unitBalances.entries) {
               final unit = unitEntry.key;
@@ -1681,7 +1679,6 @@ class _RecoverTokensModalState extends State<_RecoverTokensModal> {
               if (balance < BigInt.zero) {
                 hasError = true;
               } else if (balance > BigInt.zero) {
-                mintTotal += balance;
                 final formatted = UnitFormatter.formatBalance(balance, unit);
                 final label = UnitFormatter.getUnitLabel(unit);
                 recoveredDetails.add('$formatted $label');
@@ -1692,7 +1689,6 @@ class _RecoverTokensModalState extends State<_RecoverTokensModal> {
               mintsWithError++;
             } else {
               mintsScanned++;
-              totalRecovered += mintTotal;
             }
           }
 
