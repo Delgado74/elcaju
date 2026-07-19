@@ -180,7 +180,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       ),
                     ),
                     _buildSettingTile(
-                      icon: LucideIcons.github,
+                      icon: LucideIcons.externalLink,
                       title: 'GitHub',
                       onTap: () => _openGitHub(),
                     ),
