@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:lucide_icons/lucide_icons.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import '../../src/rust/api/mint_info.dart' show MintInfo, ContactInfo;
 import 'package:elcaju/l10n/app_localizations.dart';
 import '../../core/constants/colors.dart';
